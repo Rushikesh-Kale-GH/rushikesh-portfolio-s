@@ -108,7 +108,7 @@ export default class PortfolioBodyComponent extends LightningElement {
             this.dispatchCustomEvent('nav', 'downloadResume');
         }
         if (event == 'Learning') {
-            window.open('https://rushi7287.github.io/salesforce-dev-handbook-react/#/learningroute/lwc/1', '_blank').focus()
+            window.open('https://Rushikesh-Kale-GH.github.io/salesforce-dev-handbook-react/#/learningroute/lwc/1', '_blank').focus()
             this.dispatchCustomEvent('nav', 'learning');
         }
         if (event == 'LinkedIn') {
@@ -116,7 +116,7 @@ export default class PortfolioBodyComponent extends LightningElement {
             this.dispatchCustomEvent('nav', 'linkedIn');
         }
         if (event == 'GitHub') {
-            window.open('https://github.com/Rushi7287', '_blank').focus()
+            window.open('https://github.com/Rushikesh-Kale-GH', '_blank').focus()
             this.dispatchCustomEvent('nav', 'github');
         }
         if (event == 'Email Me') {
