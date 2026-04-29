@@ -1,0 +1,83 @@
+<template>
+  <div class="watermark-wrapper">
+    <div class="watermark top-right">
+      <div class="line"></div>
+      <span class="namewater">Rushikesh Kale</span>
+    </div>
+    <div class="watermark bottom-left">
+      <span class="namewater">rushikeshkale7287@gmail.com</span>
+      <div class="line"></div>
+    </div>
+  </div>
+  <div class="watermark-b right-center">
+    <template for:each={sections} for:item="section">
+      <button
+          key={section.id}
+          class={section.indicatorClass}
+          data-section={section.id}
+          onclick={handleScrollClick}
+          title={section.name}>
+          <span class="indicator-dot"></span>
+          <span class="indicator-label">{section.name}</span>
+        </button>
+    </template>
+  </div>
+  <div class="full-page-container" style={backgroundStyle}>
+    <div class="background-container">
+      <div class="portfolio-container">
+        <main class="portfolio-main">
+          <section class="portfolio-section about-section" data-section="about">
+            <div class="section-wrapper">
+              <c-portfolio-about-component onupdatejson={incrementChildMetric} svg-icons-list={svgIconsList} onsectionchange={childEvent}
+                is-data-loaded={isDataLoaded} profile-art-url={profileUrl} theme-one={themeOne}
+                metadata-info={metadataInfo}>
+              </c-portfolio-about-component>
+            </div>
+          </section>
+          <section class="portfolio-section experience-section" data-section="experience">
+            <div class="section-wrapper">
+              <c-portfolio-experience-component onupdatejson={incrementChildMetric} svg-icons-list={svgIconsList} onsectionchange={childEvent}>
+              </c-portfolio-experience-component>
+            </div>
+          </section>
+          <section class="portfolio-section contact-section" data-section="project">
+            <div class="section-wrapper">
+              <c-portfolio-project-component onupdatejson={incrementChildMetric} svg-icons-list={svgIconsList} onsectionchange={childEvent}>
+              </c-portfolio-project-component>
+            </div>
+          </section>
+          <section class="portfolio-section certifications-section" data-section="certifications">
+            <div class="section-wrapper">
+              <c-portfolio-view-certificate-component onupdatejson={incrementChildMetric} svg-icons-list={svgIconsList} onsectionchange={childEvent}>
+              </c-portfolio-view-certificate-component>
+            </div>
+          </section>
+          <section class="portfolio-section rnr-section" data-section="rnr">
+            <div class="section-wrapper">
+              <c-portfolio-r-and-r-component onupdatejson={incrementChildMetric} svg-icons-list={svgIconsList} onsectionchange={childEvent}>
+              </c-portfolio-r-and-r-component>
+            </div>
+          </section>
+          <section class="portfolio-section contact-section" data-section="education">
+            <div class="section-wrapper">
+              <c-portfolio-education-component svg-icons-list={svgIconsList} onsectionchange={childEvent}>
+              </c-portfolio-education-component>
+            </div>
+          </section>
+          <section class="portfolio-section resume-section" data-section="resume">
+            <div class="section-wrapper">
+              <c-portfolio-footer-component onupdatejson={incrementChildMetric} svg-icons-list={svgIconsList} onsectionchange={childEvent}>
+              </c-portfolio-footer-component>
+            </div>
+          </section>
+          <section class="portfolio-section contact-section" data-section="contact">
+            <div class="section-wrapper">
+              <c-portfolio-contact-me-component svg-icons-list={svgIconsList} onsectionchange={childEvent}>
+              </c-portfolio-contact-me-component>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+</template>

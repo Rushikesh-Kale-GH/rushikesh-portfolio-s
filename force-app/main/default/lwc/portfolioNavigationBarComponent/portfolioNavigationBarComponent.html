@@ -1,0 +1,109 @@
+<template>
+    <template if:false={dataLoaded}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+    </template>
+    <nav class={navigationClass}>
+        <div class="nav-left fade-left" style="animation-delay: 0.9s;">
+            <button class="hamburger" onclick={toggleMenu} aria-label="Toggle Menu">
+                &#9776;
+            </button>
+            <span class="hoverName nameFont one" onclick={showWalkThrought}>Rushikesh Kale</span>
+            <span class="hoverName themeC" data-id={verifiedIcon} onclick={changeTheme}></span>
+        </div>
+        <ul class={menuClassH}>
+            <li class="mobile-only-name">
+                <div class="nav-left fade-left">
+                    <div class="hamburger" onclick={toggleMenu}>
+                        <span data-id={backIcon}></span>
+                    </div>
+                    <span class="nameFont">Rushikesh Kale</span>
+                    <span data-id={verifiedIcon}></span>
+                </div>
+            </li>
+            <template for:each={navigationIcon} for:item="icon">
+                <li class="fade-down" style="animation-delay: 0.1s;" key={icon.Id}>
+                    <div class="paddingTB" data-target={icon.SVG_Label__c} onclick={handleClick}>
+                        <a class="nav-item">
+                            <span data-id={icon.Id}></span>
+                            <span class="textFont">&nbsp;{icon.SVG_Label__c}</span>
+                        </a>
+                    </div>
+                </li>
+            </template>
+        </ul>
+        <div class="nav-right three">
+            <div class="profile-container">
+                <div class="profile-circle glass shadow-lg" onclick={togglePopup}>
+                    <img src={profileUrl} alt="Rushikesh Kale" class="profile-img">
+                </div>
+                <div class={cardClass} onclick={togglePopup}>
+                    <div class="card-content">
+                        <div class="justCenter">
+                            <div class="profile-circle-1" onclick={togglePopup}>
+                                <div class="profile-img-container-1">
+                                    <img src={profileUrl} alt="Rushikesh Kale" class="profile-img">
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={dataLoaded}>
+                            <h2 class="newFont">{nameUpperCase}</h2>
+                            <p class="designate"> <span class="big-emoji">&#128187;</span>
+                                <span class="designation">{metadataInfo.Post__c}</span>
+                            </p>
+                             <p class="company">{metadataInfo.Current_Company_Name__c}</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <lightning-icon icon-name="utility:location" size="x-small" class="icon-location">
+                                    </lightning-icon>
+                                    <span>Pune, Maharashtra, India</span>
+                                </div>
+                                <!-- <div class="contact-item">
+                                    <lightning-icon icon-name="utility:phone_portrait" size="x-small"
+                                        class="icon-phone"></lightning-icon>
+                                    <span>+91-{metadataInfo.Contact_Number__c}</span>
+                                </div> -->
+                                <div class="contact-item">
+                                    <lightning-icon icon-name="utility:email" size="x-small" class="icon-email">
+                                    </lightning-icon>
+                                    <span>{metadataInfo.Email_ID__c}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <lightning-icon icon-name="utility:socialshare" size="x-small"
+                                        class="icon-linkedin"></lightning-icon>
+                                    <span class="linkedin-text">{metadataInfo.LinkedIn_URL__c}</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <template lwc:if={isMenuOpen}>
+        <div class="menu-overlay" onclick={toggleMenu}></div>
+    </template>
+    <div class="floating-container">
+        <div class={menuClassF}>
+            <div class="menu-grid">
+                <template for:each={menuIcon} for:item="icon">
+                    <div class="menu-item" onclick={handleMenuClick} data-name={icon.SVG_Label__c} key={icon.Id}>
+                        <div class="icon-box">
+                            <span data-id={icon.Id}></span>
+                        </div>
+                        <span>{icon.SVG_Label__c}</span>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="fade-left four">
+            <div class={buttonClass} onclick={toggleMenuFloat} draggable="true" style="animation-delay: 0.4s;">
+                <span data-id={menuLogoIcon}></span>
+            </div>
+        </div>
+    </div>
+    <template lwc:if={isOpen}>
+        <div class="backdrop" onclick={toggleMenuFloat}></div>
+    </template>
+</template>

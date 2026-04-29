@@ -1,0 +1,80 @@
+<template>
+  <div>
+    <div class="certification-container">
+      <div class="certification-wrapper">
+        <div class="section-header" data-scroll-id="about-section">
+          <div class="icon-wrapper">
+            <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+            </lightning-icon>
+          </div>
+          <h2 class="section-title">Certifications</h2>
+        </div>
+        <template if:false={isModalOpen}>
+          <div class="genericP">
+            <div class="certification-grid">
+              <template for:each={certifications} for:item="cert">
+                <div key={cert.certName} class="cert-card">
+                  <div class="cert-front">
+                    <div class="cert-logo-wrapper">
+                      <img
+                  src={cert.logoBase64}
+                  alt={cert.name}
+                  class="cert-logo"
+                  onerror={handleImageError}
+                />
+                    </div>
+                    <h3 class="cert-name">{cert.name}</h3>
+                    <p class="cert-date">
+                      <lightning-icon icon-name="utility:date_input" size="xx-small" class="date-icon">
+                      </lightning-icon>
+                      {cert.sdate}
+                    </p>
+                    <p><lightning-icon icon-name="utility:chevronright" size="xx-small" class="bullet-icon"> 
+                    </lightning-icon> View Details </p>
+                  </div>
+                  <div class="cert-back">
+                    <div class="cert-description-wrapper">
+                      <p class="cert-description">{cert.description}</p>
+                      <p class="cert-date-back">
+                        <lightning-icon icon-name="utility:date_input" size="xx-small" class="date-icon-back">
+                        </lightning-icon>
+                        {cert.sdate}
+                      </p>
+                    </div>
+                    <div class="cert-action">
+                      <button
+                  class="view-cert-btn"
+                  data-url={cert.certBase64}
+                  onclick={handleImageClick}>
+                  <lightning-icon 
+                    icon-name="utility:preview" 
+                    size="x-small" 
+                    class="btn-icon">
+                  </lightning-icon>
+                  View Certificate
+                </button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+        <template if:true={isModalOpen}>
+          <div class="genericP">
+            <div class="floating-container">
+              <div class="modal-overlay" onclick={closeModal}>
+                <div class="modal-glass-content" onclick={stopProp}>
+                  <button class="close-btn" onclick={closeModal}>&times;</button>
+                  <div class="modal-body">
+                    <img src={selectedImageUrl} class="modal-preview-img" alt="Preview" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>

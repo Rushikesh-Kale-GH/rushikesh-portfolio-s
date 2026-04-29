@@ -1,0 +1,34 @@
+<template>
+  <div class="education-container">
+    <div class="education-wrapper">
+      <div class="section-header" data-scroll-id="education-section">
+        <div class="icon-wrapper">
+          <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+          </lightning-icon>
+        </div>
+        <h2 class="section-title">Education</h2>
+      </div>
+      <div class="genericP">
+        <div class="education-grid">
+          <template for:each={educationWithStyles} for:item="edu">
+            <div key={edu.id} class={edu.cardClass}>
+              <div class="card-header">
+                <h3 class="degree-title">{edu.degree}</h3>
+                <p class="institution-name">{edu.institution}</p>
+                <div class="card-body">
+                  <p class="education-description">{edu.description}</p>
+                </div>
+                <p class="location">{edu.location}</p>
+                <div class="duration-grade">
+                  <span class="duration-badge">{edu.duration}</span>
+                  <span class="grade-badge">{edu.grade}</span>
+                </div>
+              </div>
+              <img src={edu.imageUrl} alt={edu.degree} class="education-image" />
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

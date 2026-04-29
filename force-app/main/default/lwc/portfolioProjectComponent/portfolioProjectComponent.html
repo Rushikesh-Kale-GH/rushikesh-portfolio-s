@@ -1,0 +1,54 @@
+<template>
+  <div class="project-container">
+    <div class="project-wrapper">
+      <div class="section-header" data-scroll-id="projects-section">
+        <div class="icon-wrapper">
+          <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+          </lightning-icon>
+        </div>
+        <h2 class="section-title">Projects</h2>
+      </div>
+      <div class="genericP">
+        <div class="project-grid">
+          <template for:each={projectsWithStyles} for:item="project">
+            <div key={project.id} class={project.cardClass} data-scroll-id={project.id}>
+              <div class="card-header">
+                <h3 class="project-title">{project.title}</h3>
+                <span class="duration-badge">{project.dateRange}</span>
+                <p class="project-description">{project.description}</p>
+              </div>
+              <div class="technologies-wrapper">
+                <template for:each={project.technologies} for:item="tech">
+                  <span key={tech} class="tech-badge">{tech}</span>
+                </template>
+              </div>
+              <template if:true={project.isExpanded}>
+                <div class="details-section">
+                  <div class="details-divider"></div>
+                  <h4 class="details-heading">Project Details</h4>
+                  <div class="card-body">
+                    <template for:each={project.details} for:item="detail">
+                      <div key={detail.id} class="detail-item">
+                        <lightning-icon icon-name="utility:chevronright" size="xx-small" class="bullet-icon">
+                        </lightning-icon>
+                        <div class="detail-content">
+                          <span class="detail-text">{detail.text}</span>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </template>
+              <button
+                class="show-details-btn"
+                data-id={project.id}
+                onclick={handleToggleDetails}>
+                {project.buttonLabel}
+              </button>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

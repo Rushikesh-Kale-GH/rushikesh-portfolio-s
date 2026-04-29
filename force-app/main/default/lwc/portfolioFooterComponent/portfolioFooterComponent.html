@@ -1,0 +1,181 @@
+<template>
+  <div class="resume-viewer-container">
+    <div class="resume-viewer-wrapper">
+      <div class="section-header" data-scroll-id="about-section">
+        <div class="icon-wrapper">
+          <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+          </lightning-icon>
+        </div>
+        <h2 class="section-title">Resume & Cover Letter</h2>
+      </div>
+      <div data-scroll-id="cover"></div>
+      <template if:false={isHideButton}>
+        <div class="genericP buttons-grid">
+          <div class="button-card">
+            <div class="button-content">
+              <div class="button-icon-wrapper orange">
+                <lightning-icon icon-name="utility:file" size="large" class="button-icon">
+                </lightning-icon>
+              </div>
+              <h3 class="button-title">My Resume</h3>
+              <p class="button-description">
+                View my professional resume with detailed work experience,
+                skills, and achievements
+              </p>
+              <button
+              class="action-btn orange-btn"
+              onclick={handleViewResume}>
+              <lightning-icon 
+                icon-name="utility:preview" 
+                size="small" 
+                class="btn-icon">
+              </lightning-icon>
+              My Resume
+            </button>
+            </div>
+          </div>
+          <div class="button-card">
+            <div class="button-content">
+              <div class="button-icon-wrapper blue">
+                <lightning-icon icon-name="utility:text" size="large" class="button-icon">
+                </lightning-icon>
+              </div>
+              <h3 class="button-title">Cover Letter</h3>
+              <p class="button-description">
+                Read my cover letter highlighting my passion for technology
+                and career aspirations
+              </p>
+              <button
+              class="action-btn blue-btn"
+              onclick={handleViewCoverLetter}>
+              <lightning-icon 
+                icon-name="utility:preview" 
+                size="small" 
+                class="btn-icon">
+              </lightning-icon>
+              Cover Letter
+            </button>
+            </div>
+          </div>
+        </div>
+      </template>
+      <template if:true={isHideButton}>
+        <div class="heightResume"></div>
+      </template>
+      <template if:true={showResumeModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true"
+          class="slds-modal slds-fade-in-open modal-custom paddingTop">
+          <div>
+            <header class="slds-modal__header modal-header">
+              <button
+                class="slds-button slds-button_icon slds-modal__close close-btn"
+                title="Close"
+                onclick={handleCloseResume}>
+                <lightning-icon 
+                  icon-name="utility:close" 
+                  size="small" 
+                  alternative-text="close"
+                  class="close-icon">
+                </lightning-icon>
+              </button>
+              <h2 class="slds-modal__title modal-title">
+                <lightning-icon icon-name="utility:file" size="medium" class="title-icon orange-icon">
+                </lightning-icon>
+                My Resume
+              </h2>
+            </header>
+            <div class="modal-body">
+              <div class="pdf-container">
+                <template if:true={resumeUrl}>
+                  <object data={resumeUrl} type="application/pdf" width="100%"
+                  height="600px"></object>
+                </template>
+                <template if:false={resumeUrl}>
+                  <div class="pdf-loading">
+                    <lightning-icon icon-name="utility:spinner" size="large" class="spinner-icon">
+                    </lightning-icon>
+                    <p>Loading Resume...</p>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <footer class="slds-modal__footer modal-footer">
+              <button
+                class="footer-btn download-btn orange-download"
+                onclick={handleDownloadResume}>
+                <lightning-icon 
+                  icon-name="utility:download" 
+                  size="x-small" 
+                  class="footer-btn-icon">
+                </lightning-icon>
+                Download Resume
+              </button>
+              <button
+                class="footer-btn close-btn-footer"
+                onclick={handleCloseResume}>
+                Close
+              </button>
+            </footer>
+          </div>
+        </section>
+      </template>
+      <template if:true={showCoverLetterModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true"
+          class="slds-modal slds-fade-in-open modal-custom paddingTop">
+          <div>
+            <header class="slds-modal__header modal-header">
+              <button
+                class="slds-button slds-button_icon slds-modal__close close-btn"
+                title="Close"
+                onclick={handleCloseCoverLetter}>
+                <lightning-icon 
+                  icon-name="utility:close" 
+                  size="small" 
+                  alternative-text="close"
+                  class="close-icon">
+                </lightning-icon>
+              </button>
+              <h2 class="slds-modal__title modal-title">
+                <lightning-icon icon-name="utility:text" size="small" class="title-icon blue-icon">
+                </lightning-icon>
+                My Cover Letter
+              </h2>
+            </header>
+            <div class="modal-body">
+              <div class="pdf-container">
+                <template if:true={coverLetterUrl}>
+                  <object data={coverLetterUrl} type="application/pdf" width="100%"
+                  height="600px"></object>
+                </template>
+                <template if:false={coverLetterUrl}>
+                  <div class="pdf-loading">
+                    <lightning-icon icon-name="utility:spinner" size="large" class="spinner-icon">
+                    </lightning-icon>
+                    <p>Loading Cover Letter...</p>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <footer class="slds-modal__footer modal-footer">
+              <button
+                class="footer-btn download-btn blue-download"
+                onclick={handleDownloadCoverLetter}>
+                <lightning-icon 
+                  icon-name="utility:download" 
+                  size="x-small" 
+                  class="footer-btn-icon">
+                </lightning-icon>
+                Download Cover Letter
+              </button>
+              <button
+                class="footer-btn close-btn-footer"
+                onclick={handleCloseCoverLetter}>
+                Close
+              </button>
+            </footer>
+          </div>
+        </section>
+      </template>
+    </div>
+  </div>
+</template>

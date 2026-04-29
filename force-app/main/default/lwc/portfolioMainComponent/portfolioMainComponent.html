@@ -1,0 +1,13 @@
+<template>
+    <template if:true={isAnimation}>
+        <c-portfolio-react-learning-component onanimationend={handleAnimationEnd}>
+        </c-portfolio-react-learning-component>
+    </template>
+    <template if:false={isAnimation}>
+        <c-portfolio-navigation-bar-component onupdatejson={incrementChildMetric} onthemeclick={handleThemeClick} onmenuclick={handleMenuClick}
+            onnavclick={handleNavClick} profile-url={profileUrl}>
+        </c-portfolio-navigation-bar-component>
+        <c-portfolio-body-component onupdatejson={incrementChildMetric} nav-event={navEvent} profile-url={profileUrl} theme-one={themeOne}>
+        </c-portfolio-body-component>
+    </template>
+</template>

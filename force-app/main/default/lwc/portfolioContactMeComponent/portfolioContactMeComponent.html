@@ -1,0 +1,269 @@
+<template>
+  <div class="contact-container">
+    <div class="contact-wrapper">
+      <div class="section-header" data-scroll-id="about-section">
+        <div class="icon-wrapper">
+          <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+          </lightning-icon>
+        </div>
+        <h2 class="section-title">Contact Me</h2>
+      </div>
+      <div class="genericP">
+        <div class="contact-content">
+          <div class="contact-form-section">
+            <div class="form-card">
+              <div class="genericPb">
+                <h3 class="info-title"> Send Me a Message!</h3>
+                <p class="info-subtitle">
+                  Let’s Connect. Fill out the form below and I'll get back to you soon!
+                </p>
+              </div>
+              <template if:true={showSuccess}>
+                <div class="message-box success-message">
+                  <lightning-icon icon-name="utility:success" size="small" class="message-icon">
+                  </lightning-icon>
+                  <p>Thank you! Your message has been sent successfully.</p>
+                </div>
+              </template>
+              <template if:true={showError}>
+                <div class="message-box error-message">
+                  <lightning-icon icon-name="utility:error" size="small" class="message-icon">
+                  </lightning-icon>
+                  <p>{errorMessage}</p>
+                </div>
+              </template>
+              <div class="contact-form">
+                <div class="form-group">
+                  <label for="name" class="form-label">
+                  Full Name <span class="required">*</span>
+                </label>
+                  <div class="input-wrapper">
+                    <lightning-icon icon-name="utility:user" size="x-small" class="input-icon">
+                    </lightning-icon>
+                    <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-input"
+                    placeholder="Enter your full name"
+                    value={formData.name}
+                    onchange={handleInputChange}
+                    required
+                  />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">
+                  Email Address <span class="required">*</span>
+                </label>
+                  <div class="input-wrapper">
+                    <lightning-icon icon-name="utility:email" size="x-small" class="input-icon">
+                    </lightning-icon>
+                    <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    placeholder="your.email@example.com"
+                    value={formData.email}
+                    onchange={handleInputChange}
+                    required
+                  />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="company" class="form-label">
+                  Company
+                </label>
+                  <div class="input-wrapper">
+                    <lightning-icon icon-name="utility:building" size="x-small" class="input-icon">
+                    </lightning-icon>
+                    <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    class="form-input"
+                    placeholder="Your company name"
+                    value={formData.company}
+                    onchange={handleInputChange}
+                  />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="phone" class="form-label">
+                  Phone Number
+                </label>
+                  <div class="input-wrapper">
+                    <lightning-icon icon-name="utility:phone_portrait" size="x-small" class="input-icon">
+                    </lightning-icon>
+                    <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="form-input"
+                    placeholder="+91-1234567890"
+                    value={formData.phone}
+                    onchange={handleInputChange}
+                  />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="subject" class="form-label">
+                  Subject <span class="required">*</span>
+                </label>
+                  <div class="input-wrapper">
+                    <lightning-icon icon-name="utility:topic" size="x-small" class="input-icon">
+                    </lightning-icon>
+                    <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    class="form-input"
+                    placeholder="What is this regarding?"
+                    value={formData.subject}
+                    onchange={handleInputChange}
+                    required
+                  />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="message" class="form-label">
+                  Message <span class="required">*</span>
+                </label>
+                  <div class="textarea-wrapper">
+                    <lightning-icon icon-name="utility:comment" size="x-small" class="textarea-icon">
+                    </lightning-icon>
+                    <textarea
+                    id="message"
+                    name="message"
+                    class="form-textarea"
+                    placeholder="Tell me about your project or inquiry..."
+                    rows="5"
+                    value={formData.message}
+                    onchange={handleInputChange}
+                    required
+                  ></textarea>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button
+                  class="submit-btn"
+                  onclick={handleSubmit}
+                  disabled={isSubmitting}>
+                  <template if:false={isSubmitting}>
+                    <lightning-icon 
+                      icon-name="utility:send" 
+                      size="x-small" 
+                      class="btn-icon">
+                    </lightning-icon>
+                    Send Message
+                  </template>
+                  <template if:true={isSubmitting}>
+                    <lightning-icon 
+                      icon-name="utility:spinner" 
+                      size="x-small" 
+                      class="btn-icon spinner">
+                    </lightning-icon>
+                    Sending...
+                  </template>
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-info-section">
+            <div class="info-card">
+              <div class="genericPb">
+                <h3 class="info-title">Professional Network</h3>
+                <p class="info-subtitle">
+                  Open to leadership roles focused on organizational growth and technical excellence
+                </p>
+                <p class="info-subtitle">
+                  
+                </p>
+              </div>
+              <div class="contact-details">
+                <div class="detail-item">
+                  <div class="detail-icon-wrapper">
+                    <lightning-icon icon-name="utility:email" size="small" class="detail-icon">
+                    </lightning-icon>
+                  </div>
+                  <div class="detail-content">
+                    <p class="detail-label">Email : </p>
+                    <p class="detail-value">rushikeshkale7287@gmail.com</p>
+                  </div>
+                </div>
+                <!-- <div class="detail-item">
+                  <div class="detail-icon-wrapper">
+                    <lightning-icon icon-name="utility:phone_portrait" size="small" class="detail-icon">
+                    </lightning-icon>
+                  </div>
+                  <div class="detail-content">
+                    <p class="detail-label">Phone : </p>
+                    <p class="detail-value">+91-7972391051</p>
+                  </div>
+                </div> -->
+                <div class="detail-item">
+                  <div class="detail-icon-wrapper">
+                    <lightning-icon icon-name="utility:location" size="small" class="detail-icon">
+                    </lightning-icon>
+                  </div>
+                  <div class="detail-content">
+                    <p class="detail-label">Location : </p>
+                    <p class="detail-value">Pune, Maharashtra, India</p>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-icon-wrapper">
+                    <lightning-icon icon-name="utility:socialshare" size="small" class="detail-icon">
+                    </lightning-icon>
+                  </div>
+                  <div class="detail-content">
+                    <p class="detail-label">LinkedIn : </p>
+                    <p class="detail-value detail-link">linkedin.com/in/rushikesh-kale</p>
+                  </div>
+                </div>
+              </div>
+              <div class="social-links">
+                <footer class="footer-container">
+                  <div class="footer-stack">
+                    <div class="row">
+                      <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M3.29701 5.2338C3.52243 4.27279 4.27279 3.52243 5.2338 3.29701V3.29701C6.06663 3.10165 6.93337 3.10165 7.7662 3.29701V3.29701C8.72721 3.52243 9.47757 4.27279 9.70299 5.2338V5.2338C9.89835 6.06663 9.89835 6.93337 9.70299 7.7662V7.7662C9.47757 8.72721 8.72721 9.47757 7.7662 9.70299V9.70299C6.93337 9.89835 6.06663 9.89835 5.2338 9.70299V9.70299C4.27279 9.47757 3.52243 8.72721 3.29701 7.7662V7.7662C3.10166 6.93337 3.10166 6.06663 3.29701 5.2338V5.2338Z"
+                          stroke="red" stroke-width="1.5" />
+                        <path
+                          d="M3.29701 16.2338C3.52243 15.2728 4.27279 14.5224 5.2338 14.297V14.297C6.06663 14.1017 6.93337 14.1017 7.7662 14.297V14.297C8.72721 14.5224 9.47757 15.2728 9.70299 16.2338V16.2338C9.89835 17.0666 9.89835 17.9334 9.70299 18.7662V18.7662C9.47757 19.7272 8.72721 20.4776 7.7662 20.703V20.703C6.93337 20.8983 6.06663 20.8983 5.2338 20.703V20.703C4.27279 20.4776 3.52243 19.7272 3.29701 18.7662V18.7662C3.10166 17.9334 3.10166 17.0666 3.29701 16.2338V16.2338Z"
+                          stroke="#FFBF00" stroke-width="1.5" />
+                        <path
+                          d="M14.297 5.2338C14.5224 4.27279 15.2728 3.52243 16.2338 3.29701V3.29701C17.0666 3.10165 17.9334 3.10165 18.7662 3.29701V3.29701C19.7272 3.52243 20.4776 4.27279 20.703 5.2338V5.2338C20.8983 6.06663 20.8983 6.93337 20.703 7.7662V7.7662C20.4776 8.72721 19.7272 9.47757 18.7662 9.70299V9.70299C17.9334 9.89835 17.0666 9.89835 16.2338 9.70299V9.70299C15.2728 9.47757 14.5224 8.72721 14.297 7.7662V7.7662C14.1017 6.93337 14.1017 6.06663 14.297 5.2338V5.2338Z"
+                          stroke="#00B9F7" stroke-width="1.5" />
+                        <path
+                          d="M14.297 16.2338C14.5224 15.2728 15.2728 14.5224 16.2338 14.297V14.297C17.0666 14.1017 17.9334 14.1017 18.7662 14.297V14.297C19.7272 14.5224 20.4776 15.2728 20.703 16.2338V16.2338C20.8983 17.0666 20.8983 17.9334 20.703 18.7662V18.7662C20.4776 19.7272 19.7272 20.4776 18.7662 20.703V20.703C17.9334 20.8983 17.0666 20.8983 16.2338 20.703V20.703C15.2728 20.4776 14.5224 19.7272 14.297 18.7662V18.7662C14.1017 17.9334 14.1017 17.0666 14.297 16.2338V16.2338Z"
+                          stroke="black" stroke-width="1.5" />
+                      </svg>
+                    </div>
+                     <div class="row">
+                      <h2 class="visitCount">Visit Count : {count}</h2>
+                    </div>
+                    <div class="row">
+                      <h3 class="info-title">Thank's for visit 😄</h3>
+                    </div>
+                    <div class="row">
+                      <p class="info-subtitle">
+                        © 2026 Rushikesh Kale. All rights reserved.
+                      </p>
+                    </div>
+                    <div class="row social-links">
+                    </div>
+                  </div>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

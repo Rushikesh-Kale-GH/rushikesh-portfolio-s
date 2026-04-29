@@ -1,0 +1,85 @@
+<template>
+    <div class="about-container">
+        <div class="about-wrapper">
+            <div class="main-section" data-scroll-id="about-section">
+                <div class="section-header">
+                    <div class="icon-wrapper">
+                        <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+                        </lightning-icon>
+                    </div>
+                    <h2 class="section-title">About Me</h2>
+                </div>
+            </div>
+            <div class="about-grid">
+                <div class="content-section">
+                    <div class="intro-text">
+                        <p class="greeting">Hi, I am</p>
+                        <h1 class="name">Rushikesh Santosh Kale.</h1>
+                    </div>
+                    <div class="job-title-wrapper">
+                        <p class="job-title-prefix">I am</p>
+                        <h2 class="job-title">Senior Software Developer,</h2>
+                    </div>
+                    <div class="description">
+                        <p class="description-text">with <span class="highlight-blue">3+ years of experience </span>
+                            delivering scalable,
+                            integration-driven solutions using
+                            <span class="highlight-blue"> Apex</span>, <span class="highlight-blue">LWC</span>, Trigger
+                            Frameworks, Flow Orchestration,
+                            <span class="highlight-blue">Security & Sharing Model </span>
+                            and
+                            <span class="highlight-blue"> Asynchronous Apex</span>. Strong expertise in
+                            <span class="highlight-blue"> REST/SOAP</span> integrations,
+                            Design Patterns, Bulkification and <span class="highlight-blue">Governor Limit </span>
+                            optimization. Experienced in <span class="highlight-blue">CI/CD</span> pipelines and
+                            <span class="highlight-blue"> Release Management</span>. Proven ability to
+                            <span class="highlight-blue"> lead small technical team</span>, gather business
+                            requirements,
+                            and
+                            <span class="highlight-blue"> enterprise-grade</span> solutions designed to integrate
+                            seamlessly <span class="highlight-blue">within existing systems</span> while ensuring future
+                            scalability.
+                            Actively leveraging <span class="highlight-blue">AI tools</span> and
+                            <span class="highlight-blue"> System Design principles</span> to drive development
+                            efficiency
+                            and high-performance architectural thinking.
+                        </p>
+                    </div>
+                    <div class="section skills-section">
+                        <div class="section-header">
+                            <div>
+                                <lightning-icon icon-name="utility:code" size="x-small" class="section-icon">
+                                </lightning-icon>
+                            </div>
+                            <h1 class="subTitle"><span style='font-size:28px;'>&#128203;</span> Tech Skill & Tools :
+                            </h1>
+                        </div>
+                        <div class="skill-buttons">
+                            <template for:each={skillCategories} for:item="category">
+                                <button key={category.key} class={category.buttonClass} data-key={category.key}
+                                    onclick={handleSkillCategoryClick}> {category.title}
+                                </button>
+                            </template>
+                        </div>
+                        <div class="skills-display">
+                            <h3 class="skills-display-title">{activeSkillCategoryTitle}</h3>
+                            <div class="skill-tags">
+                                <template for:each={activeSkills} for:item="skill">
+                                    <span key={skill} class="skill-tag">{skill}</span>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="egg-wrapper">
+                        <img src={profileArtUrl} alt="Developer Avatar" class="developer-img"/>
+                    </div>
+                    <div class="statusTextStyle"> "I approach technology through logic, structure, and first principles.
+                        Tools and frameworks
+                        are simply mediums for execution."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

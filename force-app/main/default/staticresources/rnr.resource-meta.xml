@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>application/x-zip-compressed</contentType>
+    <description>Education, Rewards &amp; Recognition image. 2 + 5 image. If want to add create record of Professional Achievement with respective record type and map the url</description>
+</StaticResource>

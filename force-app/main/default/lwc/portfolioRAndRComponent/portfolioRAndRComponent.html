@@ -1,0 +1,160 @@
+<template>
+  <div class="rewards-container">
+    <div class="rewards-wrapper">
+      <!-- Section Header -->
+      <div class="section-header" data-scroll-id="rewards-section">
+        <div class="icon-wrapper" data-scroll-id="reset">
+          <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+          </lightning-icon>
+        </div>
+        <h2 class="section-title">Rewards & Recognition</h2>
+      </div>
+
+      <!-- Carousel Controls & Content -->
+      <div class="carousel-container" >
+        <!-- Progress Bar -->
+        <template if:true={showNavigation}>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" style={progressBarStyle}></div>
+            </div>
+            <div class="slide-counter">
+              <span class="current-slide">{currentSlideNumber}</span>
+              <span class="slide-separator">/</span>
+              <span class="total-slides">{totalSlides}</span>
+            </div>
+          </div>
+        </template>
+
+        <template if:true={showNavigation}>
+          <div class="swipe-instruction">
+            <div class="swipe-text">
+              <lightning-icon 
+                icon-name="utility:swipe" 
+                size="x-small">
+              </lightning-icon>
+              <span>Swipe left or right to navigate</span>
+            </div>
+          </div>
+        </template>
+
+        <!-- Slider Wrapper -->
+        <div class="slider-wrapper" 
+             onmouseenter={handleMouseEnter}
+             onmouseleave={handleMouseLeave}>
+          
+          <!-- Rewards Slider -->
+          <div class="rewards-slider"
+               ontouchstart={handleTouchStart}
+               ontouchend={handleTouchEnd}>
+            
+            <template if:true={currentReward}>
+              <div class="genericP">
+                <div key={currentReward.id} class={currentReward.containerClass}>
+                  <!-- Image Section -->
+                  <div class="image-section">
+                    <div class="image-wrapper">
+                      <img src={currentReward.imageUrl} 
+                           alt={currentReward.title} 
+                           class="reward-image" />
+                      <div class="image-overlay"></div>
+                    </div>
+                  </div>
+
+                  <!-- Content Section -->
+                  <div class="content-section">
+                    <div class="content-card">
+                      <!-- Category Badge -->
+                      <span class={currentReward.categoryBadgeClass}>
+                        {currentReward.category}
+                      </span>
+                      
+                      <!-- Title & Organization -->
+                      <h3 class="reward-title">{currentReward.title}</h3>
+                      <p class="organization-name">{currentReward.organization}</p>
+                      <span class="duration-badge">{currentReward.date}</span>
+                      
+                      <!-- Description -->
+                      <p class="reward-description">{currentReward.description}</p>
+
+                      <!-- Highlights -->
+                      <template if:true={currentReward.highlights}>
+                        <template if:true={currentReward.highlights.length}>
+                          <div class="highlights-section">
+                            <h4 class="highlights-heading">Key Highlights:</h4>
+                            <div class="highlights-body">
+                              <template for:each={currentReward.highlights} for:item="highlight">
+                                <div key={highlight.id} class="highlight-item">
+                                  <lightning-icon 
+                                    icon-name="utility:chevronright" 
+                                    size="xx-small" 
+                                    class="bullet-icon">
+                                  </lightning-icon>
+                                  <div class="highlight-content">
+                                    <span class="highlight-text">{highlight.text}</span>
+                                  </div>
+                                </div>
+                              </template>
+                            </div>
+                          </div>
+                        </template>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Swipe Instruction for Mobile/Tablet -->
+        
+
+        <!-- Navigation Buttons - All Devices -->
+        <template if:true={showNavigation}>
+          <div class="nav-buttons-container">
+            <button 
+              class="nav-button" 
+              onclick={handlePrevious}
+              disabled={isPrevDisabled}
+              aria-label="Previous reward">
+              <lightning-icon 
+                icon-name="utility:chevronleft" 
+                size="small">
+              </lightning-icon>
+              <span>Previous</span>
+            </button>
+            
+            <button 
+              class="nav-button" 
+              onclick={handleNext}
+              disabled={isNextDisabled}
+              aria-label="Next reward">
+              <span>Next</span>
+              <lightning-icon 
+                icon-name="utility:chevronright" 
+                size="small">
+              </lightning-icon>
+            </button>
+          </div>
+        </template>
+
+        <!-- Slide Indicators (Dots) -->
+        <template if:true={showNavigation}>
+          <div class="slide-indicators">
+            <template for:each={rewardsWithIndicators} for:item="reward">
+              <span
+                key={reward.id}
+                class="indicator-dot"
+                data-index={reward.index}
+                data-active={reward.isActive}
+                onclick={handleIndicatorClick}
+                aria-label="Go to slide">
+              </span>
+            </template>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>

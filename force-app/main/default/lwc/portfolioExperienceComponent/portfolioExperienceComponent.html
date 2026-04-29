@@ -1,0 +1,58 @@
+<template>
+  <div class="experience-container">
+    <div class="experience-wrapper">
+      <div class="section-header" data-scroll-id="about-section">
+        <div class="icon-wrapper">
+          <lightning-icon icon-name="utility:file" size="medium" class="header-icon">
+          </lightning-icon>
+        </div>
+        <h2 class="section-title">Work & Experience</h2>
+      </div>
+      <div class="genericP">
+        <div class="experience-grid">
+          <template for:each={experiencesWithStyles} for:item="exp">
+            <div key={exp.id} class={exp.cardClass} data-scroll-id={exp.id}>
+              <div class="card-header">
+                <h3 class="job-title">{exp.title}</h3>
+                <p class="company-name">{exp.company}</p>
+                <p class="job-location">{exp.location}</p>
+                <span class="duration-badge">{exp.duration}</span>
+              </div>
+              <div class="card-body">
+                <template for:each={exp.responsibilities} for:item="resp">
+                  <div key={resp.id} class="responsibility-item">
+                    <lightning-icon icon-name="utility:chevronright" size="xx-small" class="bullet-icon">
+                    </lightning-icon>
+                    <div class="responsibility-content">
+                      <span class="responsibility-label">{resp.label}:</span>
+                      <template if:true={exp.isOpen}>
+                        <div>
+                          <template for:each={resp.text} for:item="top">
+                            <div class="responsibility-text" key={top.id}>
+                              <span>{top.point}. </span><span>{top.text}</span></div>
+                          </template>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+              </div>
+              <div>
+                <template if:false={exp.isOpen}>
+                  <button class="show-details-btn" data-id={exp.id} onclick={handleShowToggle}>
+                Show Details
+              </button>
+                </template>
+                <template if:true={exp.isOpen}>
+                  <button class="show-details-btn" data-id={exp.id} onclick={handleHideToggle}>
+                Hide Details
+              </button>
+                </template>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
