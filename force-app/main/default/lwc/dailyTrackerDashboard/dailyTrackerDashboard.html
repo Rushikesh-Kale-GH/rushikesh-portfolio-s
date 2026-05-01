@@ -1,0 +1,175 @@
+<template>
+    <!-- Dark gradient background wrapper -->
+    <div class="tracker-root">
+
+        <!-- Loading State -->
+        <template if:true={isLoading}>
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p class="loading-text">Loading your day…</p>
+            </div>
+        </template>
+
+        <!-- Main Content -->
+        <template if:false={isLoading}>
+
+            <!-- ── Header ── -->
+            <header class="dt-header">
+                <div class="header-left">
+                    <p class="header-date">{todayDateLabel}</p>
+                    <h1 class="header-title">{motivationText}</h1>
+                </div>
+                <div class="header-right">
+                    <button class="reflect-btn" onclick={openReflection} title="Add Reflection">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M3 3h12v10H3zM3 13l3 3 3-3"
+                                  stroke="currentColor" stroke-width="1.5"
+                                  stroke-linecap="round" stroke-linejoin="round"
+                                  fill="none"/>
+                        </svg>
+                    </button>
+                    <button class="analytics-btn" onclick={toggleAnalytics} title="Analytics">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <rect x="2" y="10" width="3" height="6" rx="1"
+                                  fill="currentColor" opacity=".7"/>
+                            <rect x="7.5" y="6" width="3" height="10" rx="1" fill="currentColor"/>
+                            <rect x="13" y="2" width="3" height="14" rx="1"
+                                  fill="currentColor" opacity=".7"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- ── Score Ring + Stats ── -->
+            <div class="score-section glass-card">
+                <c-progress-ring
+                    total-tasks={dayLog.Total_Tasks__c}
+                    completed-tasks={dayLog.Completed_Tasks__c}>
+                </c-progress-ring>
+                <div class="score-stats">
+                    <div class="stat-item">
+                        <span class="stat-num" style="color:#34C759">{dayLog.Health_Score__c}<small>%</small></span>
+                        <span class="stat-label">💚 Health</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-num" style="color:#0A84FF">{dayLog.Career_Score__c}<small>%</small></span>
+                        <span class="stat-label">💼 Career</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-num" style="color:#FF9F0A">{dayLog.Discipline_Score__c}<small>%</small></span>
+                        <span class="stat-label">⚡ Discipline</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Analytics Panel ── -->
+            <template if:true={showAnalytics}>
+                <c-analytics-dashboard></c-analytics-dashboard>
+            </template>
+
+            <!-- ── Task Sections ── -->
+            <template if:false={showAnalytics}>
+
+                <!-- Health -->
+                <div class="task-section glass-card health-card">
+                    <div class="section-header">
+                        <div class="section-title-row">
+                            <span class="section-icon health">💚</span>
+                            <h2 class="section-title">Health</h2>
+                        </div>
+                        <span class="section-progress health-text">{healthProgress}</span>
+                    </div>
+                    <div class="task-list" role="list">
+                        <template for:each={healthTasks} for:item="task">
+                            <c-task-item
+                                key={task.taskId}
+                                task-id={task.taskId}
+                                task-name={task.taskName}
+                                type={task.taskType}
+                                status={task.status}
+                                onstatuschange={handleStatusChange}>
+                            </c-task-item>
+                        </template>
+                        <template if:true={noHealthTasks}>
+                            <p class="empty-state">No health tasks configured</p>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Career (highlighted) -->
+                <div class="task-section glass-card career-card">
+                    <div class="section-header">
+                        <div class="section-title-row">
+                            <span class="section-icon career">💼</span>
+                            <h2 class="section-title">Career</h2>
+                            <span class="priority-badge">Priority</span>
+                        </div>
+                        <span class="section-progress career-text">{careerProgress}</span>
+                    </div>
+                    <div class="task-list" role="list">
+                        <template for:each={careerTasks} for:item="task">
+                            <c-task-item
+                                key={task.taskId}
+                                task-id={task.taskId}
+                                task-name={task.taskName}
+                                type={task.taskType}
+                                status={task.status}
+                                onstatuschange={handleStatusChange}>
+                            </c-task-item>
+                        </template>
+                        <template if:true={noCareerTasks}>
+                            <p class="empty-state">No career tasks configured</p>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Discipline -->
+                <div class="task-section glass-card discipline-card">
+                    <div class="section-header">
+                        <div class="section-title-row">
+                            <span class="section-icon discipline">⚡</span>
+                            <h2 class="section-title">Discipline</h2>
+                        </div>
+                        <span class="section-progress discipline-text">{disciplineProgress}</span>
+                    </div>
+                    <div class="task-list" role="list">
+                        <template for:each={disciplineTasks} for:item="task">
+                            <c-task-item
+                                key={task.taskId}
+                                task-id={task.taskId}
+                                task-name={task.taskName}
+                                type={task.taskType}
+                                status={task.status}
+                                onstatuschange={handleStatusChange}>
+                            </c-task-item>
+                        </template>
+                        <template if:true={noDisciplineTasks}>
+                            <p class="empty-state">No discipline tasks configured</p>
+                        </template>
+                    </div>
+                </div>
+
+            </template>
+            <!-- ── End Task Sections ── -->
+
+        </template>
+        <!-- ── End Main Content ── -->
+
+        <!-- Reflection Modal -->
+        <c-daily-reflection-modal
+            day-log-id={dayLogId}
+            initial-text={dayLog.Reflection__c}
+            onreflectionsaved={handleReflectionSaved}>
+        </c-daily-reflection-modal>
+
+        <!-- Toast -->
+        <template if:true={showToast}>
+            <div class={toastClass} role="status" aria-live="polite">
+                {toastMessage}
+            </div>
+        </template>
+
+    </div>
+</template>

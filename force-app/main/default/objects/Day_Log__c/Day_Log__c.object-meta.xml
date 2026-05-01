@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Day Log</label>
+    <pluralLabel>Day Logs</pluralLabel>
+    <nameField>
+        <label>Day Log Name</label>
+        <type>AutoNumber</type>
+        <displayFormat>DL-{0000}</displayFormat>
+    </nameField>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>Private</sharingModel>
+    <enableActivities>false</enableActivities>
+    <enableHistory>false</enableHistory>
+    <description>Daily tracking log per user per date</description>
+</CustomObject>

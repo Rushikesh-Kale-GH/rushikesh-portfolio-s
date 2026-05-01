@@ -1,0 +1,38 @@
+<template>
+    <template if:true={isOpen}>
+        <div class="modal-backdrop" onclick={handleBackdropClick}>
+            <div class="modal-card" onclick={stopPropagation}>
+                <div class="modal-header">
+                    <div class="modal-title-row">
+                        <span class="modal-icon">✍️</span>
+                        <h2 class="modal-title">Daily Reflection</h2>
+                    </div>
+                    <button class="close-btn" onclick={handleClose} aria-label="Close">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="2"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="modal-subtitle">How was your day? What did you learn?</p>
+
+                <textarea
+                    class="reflection-input"
+                    value={reflectionText}
+                    placeholder="Today I focused on… I'm proud of… Tomorrow I'll improve…"
+                    onchange={handleInput}
+                    rows="6">
+                </textarea>
+
+                <div class="modal-footer">
+                    <button class="btn-cancel" onclick={handleClose}>Cancel</button>
+                    <button class="btn-save" onclick={handleSave} disabled={isSaving}>
+                        <template if:true={isSaving}>Saving…</template>
+                        <template if:false={isSaving}>Save Reflection</template>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

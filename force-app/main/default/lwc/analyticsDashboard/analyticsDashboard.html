@@ -1,0 +1,62 @@
+<template>
+    <div class="analytics-wrap">
+
+        <!-- Header -->
+        <div class="analytics-header">
+            <h2 class="analytics-title">Analytics</h2>
+            <span class="header-sub">Last 7 days</span>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="streak-card glass-card">
+            <div class="streak-inner">
+                <span class="streak-flame">🔥</span>
+                <div>
+                    <div class="streak-number">{streak}</div>
+                    <div class="streak-label">Day Streak</div>
+                </div>
+            </div>
+            <p class="streak-hint">80%+ score = strong day</p>
+        </div>
+
+        <!-- Weekly Bar Chart -->
+        <div class="glass-card chart-card">
+            <h3 class="section-label">Weekly Score</h3>
+            <div class="bar-chart" aria-label="Weekly score bar chart">
+                <template for:each={weeklyStats} for:item="day">
+                    <div key={day.logDate} class="bar-col">
+                        <div class="bar-wrap">
+                            <div class="bar-fill" style={day.barStyle} title={day.score}></div>
+                        </div>
+                        <span class="bar-day">{day.dayLabel}</span>
+                    </div>
+                </template>
+            </div>
+            <div class="bar-legend">
+                <span class="legend-dot green"></span><span>Strong (80%+)</span>
+                <span class="legend-dot amber"></span><span>Fair</span>
+                <span class="legend-dot red"></span><span>Low</span>
+            </div>
+        </div>
+
+        <!-- Category Cards -->
+        <div class="glass-card chart-card">
+            <h3 class="section-label">Category Performance (30 days)</h3>
+            <div class="cat-list">
+                <template for:each={categoryStats} for:item="cat">
+                    <div key={cat.category} class="cat-row">
+                        <div class="cat-info">
+                            <span class="cat-emoji">{cat.emoji}</span>
+                            <span class="cat-name">{cat.category}</span>
+                        </div>
+                        <div class="cat-bar-bg">
+                            <div class="cat-bar-fill" style={cat.barStyle}></div>
+                        </div>
+                        <span class="cat-pct">{cat.percentage}%</span>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+    </div>
+</template>

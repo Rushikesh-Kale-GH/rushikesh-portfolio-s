@@ -1,0 +1,25 @@
+<template>
+    <div class="ring-container">
+        <svg viewBox="0 0 120 120" class="ring-svg" aria-label={ariaLabel}>
+            <!-- Background track -->
+            <circle cx="60" cy="60" r="50"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.1)"
+                    stroke-width="8"/>
+            <!-- Progress arc -->
+            <circle cx="60" cy="60" r="50"
+                    fill="none"
+                    stroke={ringColor}
+                    stroke-width="8"
+                    stroke-linecap="round"
+                    stroke-dasharray={dashArray}
+                    stroke-dashoffset={dashOffset}
+                    transform="rotate(-90 60 60)"
+                    class="progress-arc"/>
+        </svg>
+        <div class="ring-inner">
+            <span class="ring-percent">{percentage}<span class="pct-sign">%</span></span>
+            <span class="ring-label">Score</span>
+        </div>
+    </div>
+</template>
